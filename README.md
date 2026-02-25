@@ -7,14 +7,23 @@ A COSMIC panel applet that shows the number of GitHub PRs waiting for your revie
 ## Features
 
 - Displays a count of open PRs where you are a requested reviewer and have not yet approved
-- Updates every 60 seconds
 - Click the applet to open a popup with the current count
-- Click "Open GitHub" to go directly to your GitHub review queue
+- Click **Open GitHub** to go directly to your GitHub review queue
+- **Settings** — configure authentication and poll interval:
+  - **GitHub CLI** — uses `gh` CLI, no token needed; shows connected account
+  - **Personal Access Token (PAT)** — uses the GitHub REST API via `curl`
+  - **Poll interval** — choose between 30 sec, 1 min, 2 min, 5 min, 10 min, or 30 min
 
 ## Requirements
 
 - [COSMIC desktop environment](https://github.com/pop-os/cosmic-epoch)
+
+**GitHub CLI mode (default):**
 - [GitHub CLI (`gh`)](https://cli.github.com/) — authenticated via `gh auth login`
+
+**PAT mode:**
+- `curl` — available by default on most Linux systems
+- A GitHub Personal Access Token with `repo` scope
 
 ## Quick install
 
@@ -22,27 +31,15 @@ A COSMIC panel applet that shows the number of GitHub PRs waiting for your revie
 bash <(curl -fsSL https://raw.githubusercontent.com/Laeborg/cosmic-applet-github-status/main/install.sh)
 ```
 
-Then authenticate with GitHub CLI if you haven't already:
-
-```sh
-gh auth login
-```
-
 ## Building from source
 
-### 1. Authenticate with GitHub CLI
-
-```sh
-gh auth login
-```
-
-### 2. Build
+### 1. Build
 
 ```sh
 cargo build --release
 ```
 
-### 3. Install files
+### 2. Install files
 
 ```sh
 sudo just install
@@ -54,9 +51,16 @@ To uninstall:
 sudo just uninstall
 ```
 
-### 4. Add to panel
+### 3. Add to panel
 
 Right-click the COSMIC panel → **Edit panel** → click **+** → select **GitHub Status**.
+
+### 4. Authenticate
+
+Click the applet → **Settings** → choose your authentication method:
+
+- **GitHub CLI**: run `gh auth login` in a terminal first, then click **Check again** in settings to verify
+- **PAT**: paste your Personal Access Token and click **Save**
 
 ## Development
 
