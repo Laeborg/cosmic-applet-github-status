@@ -16,7 +16,19 @@ A COSMIC panel applet that shows the number of GitHub PRs waiting for your revie
 - [COSMIC desktop environment](https://github.com/pop-os/cosmic-epoch)
 - [GitHub CLI (`gh`)](https://cli.github.com/) — authenticated via `gh auth login`
 
-## Installation
+## Quick install
+
+```sh
+bash <(curl -fsSL https://raw.githubusercontent.com/Laeborg/cosmic-applet-github-status/main/install.sh)
+```
+
+Then authenticate with GitHub CLI if you haven't already:
+
+```sh
+gh auth login
+```
+
+## Building from source
 
 ### 1. Authenticate with GitHub CLI
 
