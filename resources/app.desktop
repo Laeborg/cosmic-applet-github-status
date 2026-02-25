@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=GitHub Status
+Comment=GitHub PR review status applet for COSMIC
+Type=Application
+Icon=com.laeborg.CosmicAppletGithubStatus
+Exec=cosmic-applet-github-status
+Terminal=false
+StartupNotify=true
+Categories=COSMIC
+Keywords=COSMIC;GitHub;PR;
+NoDisplay=true
+X-CosmicApplet=true
+X-CosmicHoverPopup=Auto
+MimeType=
