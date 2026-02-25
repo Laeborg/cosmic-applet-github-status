@@ -977,7 +977,7 @@ dependencies = [
 
 [[package]]
 name = "cosmic-applet-github-status"
-version = "0.1.0"
+version = "0.0.2"
 dependencies = [
  "futures-util",
  "i18n-embed",

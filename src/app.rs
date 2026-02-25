@@ -10,7 +10,7 @@ use cosmic::widget;
 use futures_util::SinkExt;
 use std::time::Duration;
 
-const GITHUB_REVIEW_URL: &str = "https://github.com/pulls/review-requested";
+const GITHUB_REVIEW_URL: &str = "https://github.com/pulls?q=is%3Apr+is%3Aopen+review-requested%3A%40me+-review%3Aapproved";
 const POLL_INTERVAL_SECS: u64 = 60;
 
 async fn fetch_pr_count() -> Result<u32, String> {
