@@ -2,7 +2,7 @@ name := 'cosmic-applet-github-status'
 appid := 'com.laeborg.CosmicAppletGithubStatus'
 
 rootdir := ''
-prefix := '/usr'
+prefix := '/usr/local'
 
 # Installation paths
 base-dir := absolute_path(clean(rootdir / prefix))

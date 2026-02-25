@@ -33,10 +33,13 @@ cargo build --release
 ### 3. Install files
 
 ```sh
-sudo install -Dm0755 target/release/cosmic-applet-github-status /usr/local/bin/cosmic-applet-github-status
-install -Dm0644 resources/app.desktop ~/.local/share/applications/com.laeborg.CosmicAppletGithubStatus.desktop
-install -Dm0644 resources/icon.svg ~/.local/share/icons/hicolor/scalable/apps/com.laeborg.CosmicAppletGithubStatus.svg
-gtk-update-icon-cache -f -t ~/.local/share/icons/hicolor/
+sudo just install
+```
+
+To uninstall:
+
+```sh
+sudo just uninstall
 ```
 
 ### 4. Add to panel
