@@ -56,7 +56,7 @@ install:
 
 # Uninstalls installed files
 uninstall:
-    rm {{bin-dst}} {{desktop-dst}} {{icon-dst}}
+    rm -f {{bin-dst}} {{desktop-dst}} {{appdata-dst}} {{icon-dst}}
 
 # Vendor dependencies locally
 vendor:
