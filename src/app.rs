@@ -231,24 +231,70 @@ impl cosmic::Application for AppModel {
         Some(Message::PopupClosed(id))
     }
 
-    /// Panel button: shows GitHub icon with PR count.
+    /// Panel button: shows GitHub icon with a badge overlay for the PR count or error.
     fn view(&self) -> Element<'_, Self::Message> {
-        let count_str = match (&self.fetch_error, self.pr_count) {
-            (Some(_), _) => "!".to_string(),
-            (_, Some(n)) => n.to_string(),
-            (_, None) => "…".to_string(),
+        use cosmic::iced::{
+            alignment::{Horizontal, Vertical},
+            Background, Border, Color, Length,
         };
 
-        let content = widget::row()
-            .push(
-                widget::icon::from_name("com.laeborg.CosmicAppletGithubStatus").size(16),
-            )
-            .push(widget::text(count_str))
-            .spacing(4)
-            .align_y(Alignment::Center);
+        let icon_size = self.core.applet.suggested_size(true).0;
 
-        widget::button::custom(content)
-            .class(cosmic::theme::Button::AppletIcon)
+        // Wrap icon with padding: top/left=2 for breathing room, right/bottom=5
+        // so the Stack has extra space for the badge to extend beyond the icon edge.
+        let icon: Element<_> = widget::container(
+            widget::icon::from_name("com.laeborg.CosmicAppletGithubStatus").size(icon_size),
+        )
+        .padding([2, 5, 5, 2])
+        .into();
+
+        // Badge: colored circle with label. Color depends on severity.
+        let badge_info: Option<(String, Color)> = match (&self.fetch_error, self.pr_count) {
+            (Some(_), _) => Some(("!".into(), Color::from_rgb(0.82, 0.18, 0.18))),
+            (_, Some(0)) => Some(("0".into(), Color::from_rgb(0.13, 0.65, 0.30))),
+            (_, Some(n)) if n <= 5 => Some((n.to_string(), Color::from_rgb(0.15, 0.45, 0.85))),
+            (_, Some(n)) if n <= 10 => Some((n.to_string(), Color::from_rgb(0.80, 0.65, 0.10))),
+            (_, Some(n)) => Some((n.to_string(), Color::from_rgb(0.82, 0.18, 0.18))),
+            (_, None) => None,
+        };
+
+        let content: Element<_> = if let Some((label, bg_color)) = badge_info {
+            let badge: Element<_> = widget::container(
+                widget::text(label).size(9).class(Color::WHITE),
+            )
+            .width(13)
+            .height(13)
+            .align_x(Horizontal::Center)
+            .align_y(Vertical::Center)
+            .class(cosmic::theme::Container::Custom(Box::new(move |_| {
+                cosmic::iced_widget::container::Style {
+                    background: Some(Background::Color(bg_color)),
+                    border: Border {
+                        radius: 100.0.into(),
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                }
+            })))
+            .into();
+
+            cosmic::iced::widget::Stack::new()
+                .push(icon)
+                .push(
+                    widget::container(badge)
+                        .width(Length::Fill)
+                        .height(Length::Fill)
+                        .align_x(Horizontal::Right)
+                        .align_y(Vertical::Bottom),
+                )
+                .into()
+        } else {
+            icon
+        };
+
+        self.core
+            .applet
+            .button_from_element(content, true)
             .on_press(Message::TogglePopup)
             .into()
     }
