@@ -14,6 +14,12 @@ A COSMIC panel applet that shows the number of GitHub PRs waiting for your revie
   - **Personal Access Token (PAT)** — uses the GitHub REST API via `curl`
   - **Poll interval** — choose between 30 sec, 1 min, 2 min, 5 min, 10 min, or 30 min
 
+## Screenshots
+
+| Panel icon | Popup | Settings |
+|:---:|:---:|:---:|
+| ![Panel icon](screenshots/Screenshot-1.png) | ![Popup](screenshots/Screenshot-2.png) | ![Settings](screenshots/Screenshot-3.png) |
+
 ## Requirements
 
 - [COSMIC desktop environment](https://github.com/pop-os/cosmic-epoch)
