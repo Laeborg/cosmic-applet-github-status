@@ -7,6 +7,16 @@ A COSMIC panel applet that shows the number of GitHub PRs waiting for your revie
 ## Features
 
 - Displays a count of open PRs where you are a requested reviewer and have not yet approved
+- Shows the count as a badge directly on the panel icon — colour indicates urgency:
+
+  | State | Badge colour |
+  |---|---|
+  | Error | Red |
+  | 0 PRs | Green |
+  | 1–5 PRs | Blue |
+  | 6–10 PRs | Yellow |
+  | 11+ PRs | Red |
+
 - Click the applet to open a popup with the current count
 - Click **Open GitHub** to go directly to your GitHub review queue
 - **Settings** — configure authentication and poll interval:
